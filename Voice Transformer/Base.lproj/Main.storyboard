@@ -27,6 +27,7 @@
                                 <state key="normal" title="Button" image="microphone@2x-iphone"/>
                                 <connections>
                                     <action selector="micClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SIB-vg-RxZ"/>
+                                    <action selector="micTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZjJ-bH-kE1"/>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdi-qa-Ce4">
@@ -40,7 +41,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                 <state key="normal" title="Button" image="stop@2x-iphone"/>
                                 <connections>
-                                    <action selector="stopButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hhY-hs-OQi"/>
+                                    <action selector="stopButtonDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wub-os-m4q"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -58,18 +59,17 @@
                     <connections>
                         <outlet property="recordingLabel" destination="Rdi-qa-Ce4" id="Sao-3e-stw"/>
                         <outlet property="stopButton" destination="2JZ-1P-3gQ" id="Jir-Wb-6hH"/>
-                        <outlet property="stopButtonTapped" destination="2JZ-1P-3gQ" id="p1z-yX-IOE"/>
-                        <segue destination="dsn-gJ-aGe" kind="show" identifier="stopButtonTapped" id="meB-d1-6FA"/>
+                        <segue destination="dsn-gJ-aGe" kind="show" identifier="ButtonTapped" id="4WS-rh-3aq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1117" y="350"/>
         </scene>
-        <!--View Controller-->
+        <!--Play Sounds View Controller-->
         <scene sceneID="RTR-tu-Pku">
             <objects>
-                <viewController id="dsn-gJ-aGe" sceneMemberID="viewController">
+                <viewController id="dsn-gJ-aGe" customClass="PlaySoundsViewController" customModule="Voice_Transformer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BYb-Sq-JAR"/>
                         <viewControllerLayoutGuide type="bottom" id="iqv-XB-q5l"/>

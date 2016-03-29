@@ -9,10 +9,13 @@
 import UIKit
 import AVFoundation
 
-class RecordingViewController: UIViewController {
+class RecordingViewController: UIViewController, AVAudioRecorderDelegate {
 
   @IBOutlet weak var recordingLabel: UILabel!
   @IBOutlet weak var stopButton: UIButton!
+  
+  var recorder: AVAudioRecorder!
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,22 +29,49 @@ class RecordingViewController: UIViewController {
   @IBAction func micTapped(sender: AnyObject) {
     
     recordingLabel.hidden = false
+    recordingLabel.text = "Recording!"
     stopButton.enabled = true
+    
+    let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    let recordingName = "recordedVoice.wav"
+    let pathArray = [dirPath, recordingName]
+    let filePath = NSURL.fileURLWithPathComponents(pathArray)
+    print(filePath)
+    
+    let session = AVAudioSession.sharedInstance()
+    try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+    
+    try! recorder = AVAudioRecorder(URL: filePath!, settings: [:])
+    recorder.delegate = self
+    recorder.meteringEnabled = true
+    recorder.prepareToRecord()
+    recorder.record()
+    
   }
 
-  @IBAction func stopButtonTapped(sender: AnyObject) {
-    performSegueWithIdentifier("stopButtonTapped", sender: nil)
+  @IBAction func stopButtonDidTap(sender: AnyObject) {
+    recorder.stop()
+  }
+  
+  func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+    if flag {
+      print("save successful")
+      self.performSegueWithIdentifier("ButtonTapped", sender: recorder.url)
+    } else {
+        print("saving error")
+    }
     
   }
   
-  func recordVoice() {
-    
-    var recorder = AVAudioRecorder()
-    
-    
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if (segue.identifier == "ButtonTapped")  {
+      
+      let playSoundVC = segue.destinationViewController as! PlaySoundsViewController
+      
+      let recordedAudioURL = sender as! NSURL
+      playSoundVC.recordedAudioURL = recordedAudioURL
+    }
   }
   
   
-
 }
-
