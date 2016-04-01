@@ -24,6 +24,7 @@ class RecordingViewController: UIViewController, AVAudioRecorderDelegate {
   
   override func viewWillAppear(animated: Bool) {
     stopButton.enabled = false
+    recordingLabel.hidden = true
   }
 
   @IBAction func micTapped(sender: AnyObject) {
