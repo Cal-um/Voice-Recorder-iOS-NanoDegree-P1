@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFX-NU-SQ3">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFX-NU-SQ3">
                                 <rect key="frame" x="248" y="248" width="104" height="104"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PFX-NU-SQ3" secondAttribute="height" multiplier="1:1" id="aPH-Wt-8Ai"/>
@@ -29,13 +29,13 @@
                                     <action selector="micTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZjJ-bH-kE1"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdi-qa-Ce4">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdi-qa-Ce4">
                                 <rect key="frame" x="261" y="360" width="78" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2JZ-1P-3gQ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2JZ-1P-3gQ">
                                 <rect key="frame" x="273" y="389" width="54" height="50"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                 <state key="normal" title="Button" image="stopButton"/>
@@ -43,19 +43,28 @@
                                     <action selector="stopButtonDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wub-os-m4q"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3Y-fX-i73">
+                                <rect key="frame" x="268" y="208" width="64" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Rdi-qa-Ce4" firstAttribute="top" secondItem="PFX-NU-SQ3" secondAttribute="bottom" constant="8" symbolic="YES" id="8jz-31-Ugx"/>
                             <constraint firstItem="Rdi-qa-Ce4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AoL-65-bfU"/>
+                            <constraint firstItem="PFX-NU-SQ3" firstAttribute="top" secondItem="S3Y-fX-i73" secondAttribute="bottom" constant="8" symbolic="YES" id="JkJ-pI-WqA"/>
                             <constraint firstItem="PFX-NU-SQ3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Uib-Mu-fSh"/>
                             <constraint firstItem="2JZ-1P-3gQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WDn-vw-7sz"/>
+                            <constraint firstItem="S3Y-fX-i73" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qbw-dq-4IZ"/>
                             <constraint firstItem="PFX-NU-SQ3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="sdX-Cy-XSw"/>
                             <constraint firstItem="2JZ-1P-3gQ" firstAttribute="top" secondItem="Rdi-qa-Ce4" secondAttribute="bottom" constant="8" symbolic="YES" id="yXE-QT-Mqz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eE4-dL-4s4"/>
                     <connections>
+                        <outlet property="durationOfRecordingLabel" destination="S3Y-fX-i73" id="dId-9O-Qdk"/>
                         <outlet property="recordingLabel" destination="Rdi-qa-Ce4" id="Sao-3e-stw"/>
                         <outlet property="stopButton" destination="2JZ-1P-3gQ" id="Jir-Wb-6hH"/>
                         <segue destination="dsn-gJ-aGe" kind="show" identifier="ButtonTapped" id="4WS-rh-3aq"/>

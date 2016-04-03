@@ -13,8 +13,12 @@ class RecordingViewController: UIViewController, AVAudioRecorderDelegate {
 
   @IBOutlet weak var recordingLabel: UILabel!
   @IBOutlet weak var stopButton: UIButton!
+  @IBOutlet weak var durationOfRecordingLabel: UILabel!
   
   var recorder: AVAudioRecorder!
+  var timer = NSTimer()
+  var timeCount = 0
+  
   
   
   override func viewDidLoad() {
@@ -25,13 +29,18 @@ class RecordingViewController: UIViewController, AVAudioRecorderDelegate {
   override func viewWillAppear(animated: Bool) {
     stopButton.enabled = false
     recordingLabel.hidden = true
+    durationOfRecordingLabel.text = "0 s"
+    durationOfRecordingLabel.hidden = true
   }
 
   @IBAction func micTapped(sender: AnyObject) {
     
+    durationOfRecordingLabel.hidden = false
+    timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(self.countUp), userInfo: nil, repeats: true)
     recordingLabel.hidden = false
     recordingLabel.text = "Recording!"
     stopButton.enabled = true
+    
     
     let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
     let recordingName = "recordedVoice.wav"
@@ -52,6 +61,10 @@ class RecordingViewController: UIViewController, AVAudioRecorderDelegate {
 
   @IBAction func stopButtonDidTap(sender: AnyObject) {
     recorder.stop()
+    
+    timer.invalidate()
+    timeCount = 0
+    
   }
   
   func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
@@ -61,6 +74,13 @@ class RecordingViewController: UIViewController, AVAudioRecorderDelegate {
     } else {
         print("saving error")
     }
+    
+  }
+  
+  func countUp() {
+    timeCount += 1
+    
+    durationOfRecordingLabel.text = String(timeCount) + " s"
     
   }
   

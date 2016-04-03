@@ -45,14 +45,11 @@ class PlaySoundsViewController: UIViewController {
     case .Parrot:
       playSound(echo: true)
     }
-    
     configureUI(.Playing)
-    
   }
   
   @IBAction func stopSound(sender: AnyObject) {
     stopAudio()
-    
     
   }
   
@@ -65,5 +62,8 @@ class PlaySoundsViewController: UIViewController {
     configureUI(.NotPlaying)
   }
   
+  override func viewWillDisappear(animated: Bool) {
+    stopAudio()
+  }
   
 }
