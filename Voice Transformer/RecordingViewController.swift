@@ -49,9 +49,19 @@ class RecordingViewController: UIViewController, AVAudioRecorderDelegate {
     print(filePath)
     
     let session = AVAudioSession.sharedInstance()
-    try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
     
-    try! recorder = AVAudioRecorder(URL: filePath!, settings: [:])
+    do {
+      try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+    } catch {
+      alertOnRecordFailure()
+    }
+    
+    do {
+      try recorder = AVAudioRecorder(URL: filePath!, settings: [:])
+    } catch {
+      alertOnRecordFailure()
+    }
+    
     recorder.delegate = self
     recorder.meteringEnabled = true
     recorder.prepareToRecord()
@@ -61,7 +71,6 @@ class RecordingViewController: UIViewController, AVAudioRecorderDelegate {
 
   @IBAction func stopButtonDidTap(sender: AnyObject) {
     recorder.stop()
-    
     timer.invalidate()
     timeCount = 0
     
@@ -84,14 +93,26 @@ class RecordingViewController: UIViewController, AVAudioRecorderDelegate {
     
   }
   
+  func alertOnRecordFailure() {
+    let alertController = UIAlertController(title: "Whoops, something went wrong", message: "Please try again", preferredStyle: .Alert)
+    let okToTryAgain = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+    
+    alertController.addAction(okToTryAgain)
+    
+    self.presentViewController(alertController, animated: true, completion: nil)
+    
+  }
+  
+  
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if (segue.identifier == "ButtonTapped")  {
       
       let playSoundVC = segue.destinationViewController as! PlaySoundsViewController
-      
       let recordedAudioURL = sender as! NSURL
+      
       playSoundVC.recordedAudioURL = recordedAudioURL
     }
+ 
   }
   
   
